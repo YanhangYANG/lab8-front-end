@@ -3,7 +3,12 @@ import type { EventItem } from "@/type"
 import axios from "axios";
 
 const apiClient: AxiosInstance = axios.create({
-    baseURL: 'http://localhost:8080',
+    baseURL: import.meta.env.VITE_BASE_URL,
+    withCredentials: false,
+    headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+    }
     // 其他的配置项
 });
 

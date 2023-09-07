@@ -18,6 +18,7 @@ import OrgService from "@/services/OrgService";
 import OrgDetailView from "@/views/org/OrgDetailView.vue";
 import OrgEditView from "@/views/org/OrgEditView.vue";
 import OrgRegisterView from "@/views/org/OrgRegisterView.vue";
+import AddEventView from "@/views/EventFormView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -132,6 +133,11 @@ const router = createRouter({
       path: '/menu',
       name: 'Menu',
       component: MenuView
+    },
+    {
+      path: '/add-event',
+      name: 'add-event',
+      component: AddEventView
     },
     {
       path: '/student',
