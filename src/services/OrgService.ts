@@ -18,5 +18,9 @@ export default {
     },
     getOrgById(id: number): Promise<AxiosResponse<OrgItem>> {
         return apiClient.get < OrgItem > ('/orgs/' + id.toString())
+    },
+    saveOrg(org: OrgItem): Promise<AxiosResponse<OrgItem>> {
+        return apiClient.post < OrgItem > ('/orgs', org)
     }
+
 }
