@@ -1,6 +1,28 @@
 <script setup lang="ts">
 import type { EventItem } from '@/type'
+import EventService from '@/services/EventService';
+import { useRouter } from 'vue-router'
 import { ref } from 'vue'
+import { useMessageStore } from '@/stores/message';
+
+const store = useMessageStore();
+const router = useRouter()
+function saveEvent() {
+    EventService.saveEvent(event.value)
+        .then((response) => {
+            console.log(response.data)
+            router.push({
+                name: 'event-detail',
+                params: { id: response.data.id }
+            })
+            store.updateMessage('You are successfully add a new event for ' + response.data.title)
+            setTimeout(() => {
+                store.updateMessage('')
+            }, 3000)
+        }).catch(() => {
+            router.push({ name: 'network-error' })
+        })
+}
 const event = ref<EventItem>({
 id: 0,
 category: '',
@@ -16,7 +38,7 @@ petsAllowed: false
 <template>
   <div>
     <h1>Create an event</h1>
-    <form>
+    <form @submit.prevent="saveEvent">
       <label>Category</label>
       <input
         v-model="event.category"
